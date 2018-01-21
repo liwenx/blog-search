@@ -45,6 +45,17 @@ spring:
       auto-commit-interval: 100
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode
+      cluster-nodes: 112.74.40.100:8085
+      properties:
+        path:
+          #elasticsearch日志存储目录
+          logs: ./elasticsearch/log
+          #elasticsearch数据存储目录
+          data: ./elasticsearch/data
 fdfs:
   soTimeout: 1500
   connectTimeout: 600
