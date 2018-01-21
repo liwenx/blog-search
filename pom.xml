@@ -10,9 +10,14 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>blog-search-web</module>
+        <module>blog-search-service</module>
+        <module>blog-search-dao</module>
+        <module>blog-search-domain</module>
+        <module>blog-search-common</module>
+        <module>blog-search-rpc</module>
     </modules>
 
-    <name>blog</name>
+    <name>blog-search</name>
     <description>Demo project for Spring Boot</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
