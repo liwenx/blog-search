@@ -1,7 +1,7 @@
 package com.yy.blog.search.consumer;
 
 import com.yy.common.util.JsonUtil;
-import com.yy.domain.Artical.Artical;
+import com.yy.domain.Artical.Article;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -26,7 +26,7 @@ public class ArticalConsumer {
     public void addArtical(ConsumerRecord<String, String> consumerRecord) throws Exception {
         //文章json字符串
         String articalJson = consumerRecord.value();
-        Artical artical = JsonUtil.fromJson(articalJson, Artical.class);
+        Article artical = JsonUtil.fromJson(articalJson, Article.class);
         //将文章放入elasticsearch服务器中
         IndexQuery indexQuery = new IndexQueryBuilder().withId(artical.getId()).withObject(artical).build();
         elasticsearchTemplate.index(indexQuery);

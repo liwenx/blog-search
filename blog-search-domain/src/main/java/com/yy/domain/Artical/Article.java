@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @date 2018/1/22 20:21
  */
 @Document(indexName = "blog", type = "artical")
-public class Artical implements Serializable{
+public class Article implements Serializable{
 
     /**
      * 主键
