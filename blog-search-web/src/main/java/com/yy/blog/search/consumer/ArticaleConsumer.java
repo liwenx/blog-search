@@ -17,18 +17,18 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class ArticalConsumer {
+public class ArticaleConsumer {
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    @KafkaListener(id = "articalConsumer", topics = {"artical"})
+    @KafkaListener(id = "articleConsumer", topics = {"zjmTest"})
     public void addArtical(ConsumerRecord<String, String> consumerRecord) throws Exception {
         //文章json字符串
-        String articalJson = consumerRecord.value();
-        Article artical = JsonUtil.fromJson(articalJson, Article.class);
+        String articleJson = consumerRecord.value();
+        Article article = JsonUtil.fromJson(articleJson, Article.class);
         //将文章放入elasticsearch服务器中
-        IndexQuery indexQuery = new IndexQueryBuilder().withId(artical.getId()).withObject(artical).build();
+        IndexQuery indexQuery = new IndexQueryBuilder().withId(article.getId()).withObject(article).build();
         elasticsearchTemplate.index(indexQuery);
     }
 }

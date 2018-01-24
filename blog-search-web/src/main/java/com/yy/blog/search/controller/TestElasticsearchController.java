@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 
 /**
@@ -41,8 +42,8 @@ public class TestElasticsearchController {
     @RequestMapping("/query")
     public @ResponseBody Object testSearch(String word) {
         QueryStringQueryBuilder queryStringQueryBuilder = new QueryStringQueryBuilder(word);
-//        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryStringQueryBuilder).build();
-        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery("content", word)).build();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryStringQuery(word)).build();
+//        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery("content", word)).build();
         return elasticsearchTemplate.queryForList(searchQuery, TestArtical.class);
     }
 }
