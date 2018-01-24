@@ -39,7 +39,7 @@ spring:
       bootstrap-servers: 112.74.40.100:9092,112.74.40.100:8090
     consumer:
       bootstrap-servers: 112.74.40.100:9092,112.74.40.100:8090
-      group-id: zjm-test
+      group-id: article-test
       auto-offset-reset: earliest
       enable-auto-commit: true
       auto-commit-interval: 100
