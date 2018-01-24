@@ -11,12 +11,4 @@
 
     <artifactId>blog-search-rpc</artifactId>
 
-    <dependencies>
-        <!-- 模块间依赖关系 -->
-        <dependency>
-            <groupId>com.yy</groupId>
-            <artifactId>blog-search-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 </project>
