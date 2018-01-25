@@ -56,6 +56,15 @@ spring:
           logs: ./elasticsearch/log
           #elasticsearch数据存储目录
           data: ./elasticsearch/data
+  dubbo:
+    application:
+      name: blog-search-provider
+    registry:
+      address: zookeeper://112.74.40.100:2181
+    protocol:
+      name: dubbo
+      port: 20883
+    scan: com.yy.service,com.yy.blog
 fdfs:
   soTimeout: 1500
   connectTimeout: 600
