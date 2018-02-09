@@ -30,7 +30,7 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
  * @date 2018/1/24 10:11
  */
 @Component
-//@Service(timeout = 50000)
+@Service(timeout = 50000)
 public class BlogElasticsearchServiceRpcImpl implements BlogElasticsearchServiceRpc {
 
     /**
