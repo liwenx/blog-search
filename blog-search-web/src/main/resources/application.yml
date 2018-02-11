@@ -40,7 +40,7 @@ spring:
     consumer:
       bootstrap-servers: 112.74.40.100:9092,112.74.40.100:8090
       group-id: article-test
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
       enable-auto-commit: true
       auto-commit-interval: 100
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer

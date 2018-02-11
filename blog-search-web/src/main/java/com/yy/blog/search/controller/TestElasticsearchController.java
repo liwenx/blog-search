@@ -9,11 +9,15 @@ import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import javax.annotation.Resource;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 
@@ -27,6 +31,11 @@ public class TestElasticsearchController {
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
+
+    @Resource
+    private RedisTemplate<String, AtomicInteger> redisTemplate;
+
+    private ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
 
     @RequestMapping("/add")
     public void testSaveArticleIndex() {
@@ -45,5 +54,49 @@ public class TestElasticsearchController {
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryStringQuery(word)).build();
 //        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery("content", word)).build();
         return elasticsearchTemplate.queryForList(searchQuery, TestArtical.class);
+    }
+
+    @RequestMapping("/testRedis")
+    public @ResponseBody Object testRedis(String word) {
+        //上读锁，其他线程只能读不能写
+        AtomicInteger value = null;
+        reentrantReadWriteLock.readLock().lock();
+        try {
+            value = redisTemplate.opsForValue().get(word);
+            if (value == null) {
+                //释放读锁
+                reentrantReadWriteLock.readLock().unlock();
+                //写锁
+                reentrantReadWriteLock.writeLock().lock();
+                try {
+                    if (value == null) {
+                        value = new AtomicInteger(1);
+                        redisTemplate.opsForValue().set(word, value);
+                    } else {
+                        value = redisTemplate.opsForValue().get(word);
+                        value.set(value.addAndGet(1));
+                    }
+                } finally {
+                    //释放写锁
+                    reentrantReadWriteLock.writeLock().unlock();
+                }
+            } else {
+                //释放读锁
+                reentrantReadWriteLock.readLock().unlock();
+                //写锁
+                reentrantReadWriteLock.writeLock().lock();
+                value = redisTemplate.opsForValue().get(word);
+                value.set(value.addAndGet(1));
+                redisTemplate.opsForValue().set(word, value);
+                //释放写锁
+                reentrantReadWriteLock.writeLock().unlock();
+            }
+            //然后再上读锁
+            reentrantReadWriteLock.readLock().lock();
+        } finally {
+            //释放读锁
+            reentrantReadWriteLock.readLock().unlock();
+        }
+        return value;
     }
 }
