@@ -88,6 +88,6 @@ public class BlogElasticsearchServiceRpcImpl implements BlogElasticsearchService
             logger.error("搜索文章错误：" + ex.getMessage());
             result.setErrorMessage("搜索文章错误：" + ex.getMessage());
         }
-        return result;
+        return result  ;
     }
 }
