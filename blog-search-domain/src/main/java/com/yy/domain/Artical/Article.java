@@ -52,27 +52,12 @@ public class Article implements Serializable{
     /**
      * 创建日期
      */
-    private String createdDate;
+    private String createDate;
 
     /**
      * 创建人
      */
     private String creator;
-
-    /**
-     * 类别
-     */
-    private Integer category;
-
-    /**
-     * 是否已发布
-     */
-    private Integer isPublish;
-
-    /**
-     * 时间戳
-     */
-    private String ts;
 
     /**
      * 删除标志
@@ -135,12 +120,12 @@ public class Article implements Serializable{
         this.content = content;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public String getCreator() {
@@ -149,30 +134,6 @@ public class Article implements Serializable{
 
     public void setCreator(String creator) {
         this.creator = creator;
-    }
-
-    public Integer getCategory() {
-        return category;
-    }
-
-    public void setCategory(Integer category) {
-        this.category = category;
-    }
-
-    public Integer getIsPublish() {
-        return isPublish;
-    }
-
-    public void setIsPublish(Integer isPublish) {
-        this.isPublish = isPublish;
-    }
-
-    public String getTs() {
-        return ts;
-    }
-
-    public void setTs(String ts) {
-        this.ts = ts;
     }
 
     public Integer getDr() {
