@@ -3,8 +3,9 @@
 <mapper namespace="article">
 
 	<!-- 结果集 -->
-	<resultMap id="orderInfoResult" type="com.yy.domain.Artical.Article">
+	<resultMap id="articleResult" type="com.yy.domain.Artical.Article">
 		<result property="id" column="id" />
+		<result property="number" column="number" />
 		<result property="pageviews" column="pageviews" />
 		<result property="title" column="title" />
 		<result property="describes" column="describes" />
@@ -14,19 +15,21 @@
 		<result property="createDate" column="create_date" />
 		<result property="creator" column="creator" />
 		<result property="dr" column="dr" />
+		<result property="userId" column="user_id" />
 	</resultMap>
 	
 	<!-- 查询字段-->
-	<sql id="orderInfoField">
-		id,pageviews,title,describes,great_number,bad_number,content,create_date,creator,dr
+	<sql id="articleField">
+		id,number,pageviews,title,describes,great_number,bad_number,content,create_date,creator,dr,user_id
 	</sql>
 
     <!-- 新增 -->	
 	<insert id="insertArticle" parameterType="article">
 		insert into article
-			(id,pageviews,title,describes,great_number,bad_number,content,create_date,creator,dr )
+			(id,number,pageviews,title,describes,great_number,bad_number,content,create_date,creator,dr,user_id )
 		values 
-			(#{id,jdbcType=VARCHAR},
+			(#{id,jdbcType=BIGINT},
+			 #{number,jdbcType=BIGINT},
 			 #{pageviews,jdbcType=VARCHAR},
 			 #{title,jdbcType=VARCHAR},
 			 #{describes,jdbcType=VARCHAR},
@@ -35,6 +38,7 @@
 			 #{content,jdbcType=LONGVARCHAR},
 			 #{createDate,jdbcType=VARCHAR},
 			 #{creator,jdbcType=VARCHAR},
-			 #{dr,jdbcType=SMALLINT})
+			 #{dr,jdbcType=SMALLINT},
+			 #{userId,jdbcType=BIGINT})
     </insert>
 </mapper>

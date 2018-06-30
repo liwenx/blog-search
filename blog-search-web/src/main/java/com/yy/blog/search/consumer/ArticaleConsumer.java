@@ -28,7 +28,7 @@ public class ArticaleConsumer {
         String articleJson = consumerRecord.value();
         Article article = JsonUtil.fromJson(articleJson, Article.class);
         //将文章放入elasticsearch服务器中
-        IndexQuery indexQuery = new IndexQueryBuilder().withId(article.getId()).withObject(article).build();
+        IndexQuery indexQuery = new IndexQueryBuilder().withId(String.valueOf(article.getId())).withObject(article).build();
         elasticsearchTemplate.index(indexQuery);
     }
 }

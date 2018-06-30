@@ -145,6 +145,13 @@
             </exclusions>
         </dependency>
 
+        <!-- sharding-jdbc -->
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>sharding-jdbc-core</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
     </dependencies>
 
     <!--<build>-->

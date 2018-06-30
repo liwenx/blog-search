@@ -19,7 +19,7 @@
 	</settings>
 
 	<mappers>
-		<mapper resource="sqlmap/article/article.xml"/>
+		<mapper resource="sqlmap/article/articleMapper.xml"/>
 	</mappers>
 	
 </configuration>

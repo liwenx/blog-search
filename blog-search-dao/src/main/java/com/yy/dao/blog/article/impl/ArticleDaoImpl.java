@@ -3,6 +3,8 @@ package com.yy.dao.blog.article.impl;
 import com.yy.dao.blog.article.ArticleDao;
 import com.yy.domain.Artical.Article;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -10,11 +12,12 @@ import javax.annotation.Resource;
 @Component("articleDao")
 public class ArticleDaoImpl implements ArticleDao{
 
-	@Resource(name="sqlSessionTemplate")
-	private SqlSessionTemplate sqlSessionTemplate;
+	@Autowired
+	@Qualifier("articleSqlSessionTemplate")
+	private SqlSessionTemplate articleSqlSessionTemplate;
 
 	@Override
 	public void insertArticle(Article article) {
-		sqlSessionTemplate.insert("article.insertArticle", article);
+		articleSqlSessionTemplate.insert("article.insertArticle", article);
 	}
 }

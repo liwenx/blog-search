@@ -1,6 +1,7 @@
 server:
   port: 8092
   context-path: /blog-search
+#@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})自动配置失效，改为编程式
 mybatis:
   type-aliases-package: com.yy.domain
   config-location: classpath:sqlmap/sqlmap-config.xml

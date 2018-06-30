@@ -17,7 +17,12 @@ public class Article implements Serializable{
      * 主键
      */
     @Id
-    private String id;
+    private Long id;
+
+    /**
+     * 编号
+     */
+    private Long number;
 
     /**
      * 浏览量
@@ -64,12 +69,25 @@ public class Article implements Serializable{
      */
     private Integer dr;
 
-    public String getId() {
+    /**
+     * 用户id
+     */
+    private Long userId;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public String getPageviews() {
@@ -142,5 +160,13 @@ public class Article implements Serializable{
 
     public void setDr(Integer dr) {
         this.dr = dr;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
