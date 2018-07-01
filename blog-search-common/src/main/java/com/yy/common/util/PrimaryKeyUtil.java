@@ -1,5 +1,6 @@
 package com.yy.common.util;
 
+import com.dangdang.ddframe.rdb.sharding.keygen.DefaultKeyGenerator;
 import com.yy.common.SnowflakeIdWorker;
 
 /**
@@ -11,11 +12,19 @@ public class PrimaryKeyUtil {
 
     private static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(1, 0);
 
+    public static DefaultKeyGenerator defaultKeyGenerator = new DefaultKeyGenerator();
+
     private PrimaryKeyUtil(){
 
     }
 
-    public static String getPrimaryKey(){
-        return String.valueOf(snowflakeIdWorker.nextId());
+    /**
+     * 使用sharding-jdbc获取分布式主键
+     * @return
+     */
+    public static Long getPrimaryKey(){
+//        return String.valueOf(snowflakeIdWorker.nextId());
+        defaultKeyGenerator.setWorkerId(0);
+        return defaultKeyGenerator.generateKey().longValue();
     }
 }

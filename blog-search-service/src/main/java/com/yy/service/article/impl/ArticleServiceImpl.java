@@ -2,10 +2,12 @@ package com.yy.service.article.impl;
 
 import com.yy.dao.blog.article.ArticleDao;
 import com.yy.domain.Artical.Article;
+import com.yy.domain.Artical.query.ArticleQuery;
 import com.yy.service.article.ArticleService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 文章服务实现类
@@ -21,5 +23,10 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public void insertArticle(Article article) {
         articleDao.insertArticle(article);
+    }
+
+    @Override
+    public List<Article> getArticleByCond(ArticleQuery articleQuery) {
+        return articleDao.getArticleByCond(articleQuery);
     }
 }

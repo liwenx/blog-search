@@ -1,22 +1,17 @@
-package com.yy.domain.Artical;
+package com.yy.domain.Artical.query;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
 /**
- * 文章实体类
  * @author zhengjm5
- * @date 2018/1/22 20:21
+ * @date 2018/7/1 18:24
  */
-@Document(indexName = "blog", type = "article")
-public class Article implements Serializable{
+public class ArticleQuery implements Serializable{
 
     /**
      * 主键
      */
-    @Id
     private Long id;
 
     /**
