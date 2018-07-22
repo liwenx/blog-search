@@ -1,5 +1,6 @@
 package com.yy.service.article.impl;
 
+import com.yy.common.util.PrimaryKeyUtil;
 import com.yy.dao.blog.article.ArticleDao;
 import com.yy.domain.Artical.Article;
 import com.yy.domain.Artical.query.ArticleQuery;
@@ -22,6 +23,7 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public void insertArticle(Article article) {
+        article.setId(PrimaryKeyUtil.getPrimaryKey());
         articleDao.insertArticle(article);
     }
 
