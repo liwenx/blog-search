@@ -11,6 +11,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +38,7 @@ public class TestElasticsearchController {
 
     private ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.GET })
     public void testSaveArticleIndex() {
         TestArtical article = new TestArtical();
         article.setTitle("郑佳铭 integreate elasticsearch");
@@ -48,7 +49,7 @@ public class TestElasticsearchController {
         elasticsearchTemplate.index(indexQuery);
     }
 
-    @RequestMapping("/query")
+    @RequestMapping(value = "/query", method = {RequestMethod.POST, RequestMethod.GET })
     public @ResponseBody Object testSearch(String word) {
         QueryStringQueryBuilder queryStringQueryBuilder = new QueryStringQueryBuilder(word);
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryStringQuery(word)).build();
@@ -56,7 +57,7 @@ public class TestElasticsearchController {
         return elasticsearchTemplate.queryForList(searchQuery, TestArtical.class);
     }
 
-    @RequestMapping("/testRedis")
+    @RequestMapping(value = "/testRedis", method = {RequestMethod.POST, RequestMethod.GET })
     public @ResponseBody Object testRedis(String word) {
         //上读锁，其他线程只能读不能写
         AtomicInteger value = null;

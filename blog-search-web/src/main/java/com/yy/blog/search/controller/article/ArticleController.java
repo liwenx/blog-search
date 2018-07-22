@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ public class ArticleController {
     private final static Logger logger = Logger.getLogger(ArticleController.class);
 
     @ApiOperation(value="新增文章")
-    @RequestMapping("article/insertArticle")
+    @RequestMapping(value = "article/insertArticle", method = {RequestMethod.POST, RequestMethod.GET })
     public Result insertArticle(Article article) {
         Result result = new Result(false);
         try {
@@ -44,7 +45,7 @@ public class ArticleController {
     }
 
     @ApiOperation(value="根据条件查询文章")
-    @RequestMapping("article/getArticleByCond")
+    @RequestMapping(value = "article/getArticleByCond", method = {RequestMethod.POST, RequestMethod.GET })
     public Result getArticleByCond(ArticleQuery articleQuery) {
         Result result = new Result(false);
         try {
