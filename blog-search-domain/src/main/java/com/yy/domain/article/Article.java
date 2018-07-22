@@ -1,4 +1,4 @@
-package com.yy.domain.Artical;
+package com.yy.domain.article;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;

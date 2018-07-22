@@ -1,8 +1,8 @@
 package com.yy.dao.blog.article;
 
 
-import com.yy.domain.Artical.Article;
-import com.yy.domain.Artical.query.ArticleQuery;
+import com.yy.domain.article.Article;
+import com.yy.domain.article.query.ArticleQuery;
 
 import java.util.List;
 

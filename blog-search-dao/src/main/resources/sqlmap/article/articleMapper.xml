@@ -3,7 +3,7 @@
 <mapper namespace="article">
 
 	<!-- 结果集 -->
-	<resultMap id="articleResult" type="com.yy.domain.Artical.Article">
+	<resultMap id="articleResult" type="com.yy.domain.article.Article">
 		<result property="id" column="id" />
 		<result property="number" column="number" />
 		<result property="pageviews" column="pageviews" />

@@ -1,7 +1,7 @@
 package com.yy.blog.search.controller.article;
 
-import com.yy.domain.Artical.Article;
-import com.yy.domain.Artical.query.ArticleQuery;
+import com.yy.domain.article.Article;
+import com.yy.domain.article.query.ArticleQuery;
 import com.yy.rpc.domain.Result;
 import com.yy.service.article.ArticleService;
 import io.swagger.annotations.Api;

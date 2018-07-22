@@ -1,7 +1,7 @@
 package com.yy.blog.search.consumer;
 
 import com.yy.common.util.JsonUtil;
-import com.yy.domain.Artical.Article;
+import com.yy.domain.article.Article;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;

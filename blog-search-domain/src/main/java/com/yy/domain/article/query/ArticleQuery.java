@@ -1,4 +1,4 @@
-package com.yy.domain.Artical.query;
+package com.yy.domain.article.query;
 
 
 import java.io.Serializable;

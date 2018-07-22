@@ -1,7 +1,7 @@
 package com.yy.service.rpc.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.yy.domain.Artical.Article;
+import com.yy.domain.article.Article;
 import com.yy.rpc.domain.ElasticsearchQueryParam;
 import com.yy.rpc.domain.Result;
 import com.yy.rpc.elasticsearch.BlogElasticsearchServiceRpc;

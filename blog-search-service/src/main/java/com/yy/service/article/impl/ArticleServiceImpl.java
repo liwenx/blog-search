@@ -2,8 +2,8 @@ package com.yy.service.article.impl;
 
 import com.yy.common.util.PrimaryKeyUtil;
 import com.yy.dao.blog.article.ArticleDao;
-import com.yy.domain.Artical.Article;
-import com.yy.domain.Artical.query.ArticleQuery;
+import com.yy.domain.article.Article;
+import com.yy.domain.article.query.ArticleQuery;
 import com.yy.service.article.ArticleService;
 import org.springframework.stereotype.Component;
 
