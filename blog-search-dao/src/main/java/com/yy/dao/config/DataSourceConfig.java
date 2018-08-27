@@ -42,7 +42,7 @@ import java.util.Map;
 public class DataSourceConfig {
 
     /**
-     * article分库基础表名
+     * article分库逻辑表名
      */
     @Value("${article.table.base.name}")
     private String articleBaseTableName;
@@ -128,6 +128,7 @@ public class DataSourceConfig {
     /**
      * 配置数据源规则，即将多个数据源交给sharding-jdbc管理，并且可以设置默认的数据源，
      * 当表没有配置分库规则时会使用默认的数据源
+     * 当表设置分库规则，查询是未带分库键，会扫描所有配置的数据源(包括默认数据源)
      * @author: zhengjm5
      * @Date: 2018-06-30 15:53:44
      * @param defalutDataSource
@@ -143,16 +144,18 @@ public class DataSourceConfig {
                                          @Qualifier("dataSource_2") DataSource dataSource_2){
         //设置分库映射
         Map<String, DataSource> dataSourceMap = Maps.newHashMapWithExpectedSize(4);
-        dataSourceMap.put("defalutDataSource", defalutDataSource);
+        //更改默认数据源，sharding-jdbc在不传分库键时，默认扫描所有数据源，切所有数据源都要有逻辑表的物理表
+//        dataSourceMap.put("defalutDataSource", defalutDataSource);
         dataSourceMap.put("dataSource0", dataSource_0);
         dataSourceMap.put("dataSource1", dataSource_1);
         dataSourceMap.put("dataSource_2", dataSource_2);
         //设置默认库，两个库以上时必须设置默认库。默认库的数据源名称必须是dataSourceMap的key之一
-        return new DataSourceRule(dataSourceMap, "defalutDataSource");
+        return new DataSourceRule(dataSourceMap, "dataSource0");
     }
 
     /**
      * 配置数据源策略和表策略，具体策略需要自己实现
+     * 当查询时未带分表键时，会扫描库中所有的和逻辑表相关的物理表
      * @param dataSourceRule
      * @return
      */
@@ -170,7 +173,7 @@ public class DataSourceConfig {
                 .dataSourceRule(dataSourceRule)
                 .build();
 
-        //绑定表策略，在查询时会使用主表策略计算路由的数据源，因此需要约定绑定表策略的表的规则需要一致，可以一定程度提高效率
+        //绑定表策略，在查询时会使用主表策略计算路由的数据源
         List<BindingTableRule> bindingTableRules = Lists.newArrayList();
         bindingTableRules.add(new BindingTableRule(Arrays.asList(articleTableRule)));
         return ShardingRule.builder()
